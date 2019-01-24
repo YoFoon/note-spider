@@ -1,0 +1,58 @@
+<% include header %>
+<div class="container">
+  <div class="header"><h1>搜小说</h1></div>
+  <section>
+    <form action="/searchResult" method="get" class="search">
+      <input
+        type="search"
+        name="search"
+        placeholder="输入小说名或者作者名搜索"
+        required="required"
+        class="forminput"
+      />
+      <button type="submit">搜索</button>
+    </form>
+    <div class="history">
+      <h3><span>搜索记录</span></h3>
+      <section id="historyList"></section>
+      <a href="javascript:;" class="clear">清除搜索记录</a>
+    </div>
+  </section>
+</div>
+<script>
+  $(function() {
+    var _html = ''
+    var history = localStorage
+    if (localStorage) {
+      for (var i = 0; i < history.length; i++) {
+        var keys = history.key(i)
+        if (keys == history.getItem(keys)) {
+          _html +=
+            '<a href="/searchResult?search=' +
+            keys +
+            '" style="color:' +
+            getRandomColor() +
+            '">' +
+            keys +
+            '</a>'
+        }
+      }
+      $(_html).appendTo('#historyList')
+    } else {
+      $('#historyList').html('暂无搜索记录')
+    }
+    $('button').on('click', function(event) {
+      var inputVal = $('.forminput').val()
+      localStorage.setItem(inputVal, inputVal)
+    })
+    $('.clear').on('click', function(event) {
+      event.preventDefault()
+      $('#historyList').html('')
+      localStorage.clear()
+    })
+  })
+  function getRandomColor() {
+    return '#' + ('00000' + ((Math.random() * 16777215 + 0.5) >> 0).toString(16)).slice(-6)
+  }
+</script>
+<% include footer %>

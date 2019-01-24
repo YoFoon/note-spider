@@ -1,0 +1,62 @@
+<% if (isShowNav) { %>
+<div class="fixedFooter">
+    <a href="/index">
+        <span class="iconfont icon-home"></span>
+        <span>首页</span>
+    </a>
+    <% if(isShowCategory){ %>
+    <a href="javascript:history.go(-1);">
+        <span class="iconfont icon-mulu"></span>
+        <span>目录</span>
+    </a>
+    <% } %>
+    <a href="/cat">
+        <span class="iconfont icon-fenlei"></span>
+        <span>分类</span>
+    </a>
+    <a href="javascript:;" id="set">
+        <span class="iconfont icon-shezhi"></span>
+        <span>设置</span>
+    </a>
+</div>
+<div class="settings">
+    <a href="javascript:;" class="minus">A-</a>
+    <a href="javascript:;" class="plus">A+</a>
+    <a onclick="setBgcolor('rgb(173,200,169)','#333')" class="color1"></a>
+    <a onclick="setBgcolor('rgb(162,157,137)','#333')" class="color2"></a>
+    <a onclick="setBgcolor('#42454e','#fff')" class="color3"></a>
+</div>
+<% } %>
+<script>
+    const $content = $('.content'),
+        $container = $('.container');
+    $(function () {
+
+        $('#set').on('click', function () {
+            $('.settings').toggleClass('active');
+        });
+        $('.plus').on('click', function () {
+            var defaultFont = parseFloat($content.css('font-size'));
+            if (defaultFont <= 24) {
+                $content.css('font-size', ++defaultFont + 'px');
+            } else {
+                return false;
+            }
+        });
+        $('.minus').on('click', function () {
+            var defaultFont = parseFloat($content.css('font-size'));
+            if (defaultFont <= 14) {
+                return false;
+            } else {
+                $content.css('font-size', --defaultFont + 'px');
+            }
+        });
+    });
+
+    function setBgcolor(thisBgcolor, thisColor) {
+        $container.css('background-color', thisBgcolor).find('a').css('color', thisColor);
+    }
+
+</script>
+</body>
+</html>

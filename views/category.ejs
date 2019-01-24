@@ -1,0 +1,33 @@
+<% include header %>
+<div class="container">
+    <div class="header">
+        <h2><%- title %><small><%- author %></small></h2>
+    </div>
+    <ul class="category">
+        <% for(var i = content.length - 1;i >= 0;i--){ %>
+        <li>
+            <a href="/chapter?url=<%- content[i].link %>&sourceId=<%- sourceId %>&chapters=<%- content[i].title %>"><%- content[i].title %></a>
+        </li>
+        <% } %>
+    </ul>
+</div>
+<a href="javascript:;" class="goTop"></a>
+<a href="javascript:;" class="goBottom"></a>
+<script>
+    $(function(){
+        $('.goTop').on('click',function(){
+            $('html,body').animate({
+                scrollTop:0
+            },300)
+        });
+        $('.goBottom').on('click',function(){
+            var winH=$(window).height();
+            var conH=$('.container').height();
+            console.log(winH,conH)
+            $('html,body').animate({
+                scrollTop:conH-winH
+            },300)
+        })
+    })
+</script>
+<% include footer %>

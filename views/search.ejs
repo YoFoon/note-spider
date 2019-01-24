@@ -1,0 +1,47 @@
+<% include header %>
+	<img src="../images/icon.png" style="position: absolute;top: -9999px;z-index: -9;">
+	<div class="container">
+		<hgroup>
+			<h1>拒绝广告-搜小说</h1>
+		</hgroup>
+		<section>
+			<form action="/searchResult" method="get" class="search">
+		        <input type="search" name="search" placeholder="What are you looking for?" class="forminput">
+		        <button type="submit">Search</button>
+		    </form>
+		    <div class="history">
+		    	<h3><span>搜索记录</span></h3>
+		    	<section id="historyList"></section>
+		    	<a href="javascript:;" class="clear">清除搜索记录</a>
+		    </div>
+		</section>
+	</div>
+	<script>
+		$(function(){
+			var _html='';
+			var history=localStorage;
+			if (localStorage) {
+				var arr=Object.keys(localStorage);
+				arr.map(function(val,index){
+					// PC chrome FEhelp插件会生成一个键值为jfVersion的ls
+					if (val!='jfVersion') {_html+='<a href="/searchResult?search='+val+'" style="color:'+getRandomColor()+'">'+val+'</a>';}
+				});
+				$(_html).appendTo('#historyList');
+			}else{
+				$('#historyList').html('暂无搜索记录');
+			}
+			$('button').on('click',function(event) {
+				var inputVal=$('.forminput').val();
+				localStorage.setItem(inputVal,inputVal);
+			});
+			$('.clear').on('click',function(event) {
+				event.preventDefault();
+				$('#historyList').html('');
+				localStorage.clear();
+			});
+		});
+		function getRandomColor(){
+			return "#"+("00000"+((Math.random()*16777215+0.5)>>0).toString(16)).slice(-6);
+		} 
+	</script>
+<% include footer %>

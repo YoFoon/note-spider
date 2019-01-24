@@ -1,0 +1,28 @@
+<% include header %>
+<div class="list">
+    <h2><span>男性</span></h2>
+    <div class="listCon">
+        <% for(var i = 0;i < content.male.length;i++){ %>
+        <a href="/catDetail?gender=male&mayjor=<%- content.male[i].name %>"><span><%- content.male[i].name %></span><span><%- content.male[i].bookCount %>本</span></a>
+        <% } %>
+    </div>
+</div>
+
+<div class="list">
+    <h2><span>女性</span></h2>
+    <div class="listCon">
+        <% for(var i = 0;i < content.female.length;i++){ %>
+        <a href="/catDetail?gender=female&mayjor=<%- content.female[i].name %>"><span><%- content.female[i].name %></span><span><%- content.female[i].bookCount %>本</span></a>
+        <% } %>
+    </div>
+</div>
+
+<div class="list">
+    <h2><span>其他</span></h2>
+    <div class="listCon">
+        <% for(var i = 0;i < content.press.length;i++){ %>
+        <a href="/catDetail?gender=press&mayjor=<%- content.press[i].name %>"><span><%- content.press[i].name %></span><span><%- content.press[i].bookCount %>本</span></a>
+        <% } %>
+    </div>
+</div>
+<% include footer %>

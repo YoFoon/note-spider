@@ -1,0 +1,43 @@
+<% include header %>
+<div class="container">
+    <ul class="searchResult">
+        <% for(var i = 0;i < content.books.length;i++){ %>
+        <li>
+            <div class="novelPic">
+                <% if (content.books[i].cover){ %>
+                <% if (!content.books[i].cover.match('http')){ %>
+                <img src="http://statics.zhuishushenqi.com<%- content.books[i].cover %>-coverl">
+                <% }else{ %>
+                <img src="<%- decodeURIComponent(content.books[i].cover.replace('/agent/', '')) %>">
+                <% } %>
+                <% }else{ %>
+                <img src="../images/error.png">
+                <% } %>
+            </div>
+            <div class="novelDetail">
+                <h3 class="title">书名：<%- content.books[i].title %></h3>
+                <p class="author">作者：<em><%- content.books[i].author %></em></p>
+                <p class="cat">类别：<%- content.books[i].mayjorCate %></p>
+                <p class="lastChapter">最新章节：<%- content.books[i].lastChapter %></p>
+                <p class="tags">标签：
+                    <% for(var j = 0;j < content.books[i].tags.length;j++){ %>
+                    <span><%- content.books[i].tags[j] %></span>
+                    <% } %>
+                </p>
+            </div>
+            <div class="novelInfo">介绍：<%- content.books[i].shortIntro %></div>
+            <a href="/sources?id=<%- content.books[i]._id %>&name=<%- content.books[i].title %>&author=<%- content.books[i].author %>"></a>
+        </li>
+        <% } %>
+    </ul>
+</div>
+<script>
+    $(function () {
+        $('.tags').each(function (index, el) {
+            $(this).find('span').each(function () {
+                $(this).css('color', "#" + ("00000" + ((Math.random() * 16777215 + 0.5) >> 0).toString(16)).slice(-6))
+            })
+        })
+    });
+</script>
+<% include footer %>

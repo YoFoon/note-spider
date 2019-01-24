@@ -1,0 +1,15 @@
+<% include header %>
+<div class="container">
+    <div class="sources">
+        <ul>
+            <% for(var i = 1;i < content.length;i++){ %>
+            <li data-val="<%- content[i].name%>" data-id="<%- content[i]._id%>">
+                <p>来源网站：<%- content[i].name%></p>
+                <p>最新章节：<%- content[i].lastChapter%></p>
+                <a href="/category?sourceId=<%- content[i]._id %>&name=<%- title %>&author=<%- author %>"></a>
+            </li>
+            <%}%>
+        </ul>
+    </div>
+</div>
+<% include footer %>
